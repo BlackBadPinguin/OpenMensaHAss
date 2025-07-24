@@ -1,6 +1,7 @@
 {
   "name": "OpenMensa",
-  "content_in_root": true,
+  "content_in_root": false,
+  "folder": "custom_components/openmensa",
   "domains": ["integration"],
   "homeassistant": "2023.1.0",
   "version": "0.0.1",
