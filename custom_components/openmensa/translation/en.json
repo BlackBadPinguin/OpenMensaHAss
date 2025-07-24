@@ -1,0 +1,14 @@
+{
+  "title": "OpenMensa",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure OpenMensa",
+        "description": "Choose your preferred canteen.",
+        "data": {
+          "mensa_id": "Canteen"
+        }
+      }
+    }
+  }
+}
