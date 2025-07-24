@@ -1,0 +1,14 @@
+{
+  "name": "OpenMensa",
+  "content_in_root": true,
+  "domains": ["integration"],
+  "homeassistant": "2023.1.0",
+  "version": "0.0.1",
+  "owner": "blackbadpinguin",
+  "repository": "openmensahass",
+  "is_private": false,
+  "description": "OpenMensa custom integration for Home Assistant",
+  "issues": "https://github.com/blackbadpinguin/openmensahass/issues",
+  "release_api": "https://api.github.com/repos/blackbadpinguin/openmensahass/releases",
+  "changelog": "https://github.com/blackbadpinguin/openmensahass/releases/tag/0.0.1"
+}
