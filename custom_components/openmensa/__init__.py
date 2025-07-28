@@ -12,17 +12,16 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up OpenMensa from a config entry."""
-    # Hier könntest du später Daten speichern:
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = entry.data
 
-    # Sensor-Platform weiterleiten
-    await hass.config_entries.async_forward_entry_setup(entry, "sensor")
+    # Zukünftige, empfohlene Methode
+    await hass.config_entries.async_forward_entry_setups(entry, ["sensor"])
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload an OpenMensa config entry."""
-    unload_ok = await hass.config_entries.async_forward_entry_unload(entry, "sensor")
+    unload_ok = await hass.config_entries.async_unload_platforms(entry, ["sensor"])
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id)
     return unload_ok

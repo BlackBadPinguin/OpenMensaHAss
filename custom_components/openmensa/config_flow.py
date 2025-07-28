@@ -11,7 +11,7 @@ from homeassistant.core import callback
 from homeassistant.const import CONF_NAME
 from homeassistant.helpers import aiohttp_client
 
-from .const import DOMAIN, CONF_CANTEEN_ID, CONF_RADIUS_KM, CONF_ZONE
+from .const import DOMAIN, CONF_MENSA_ID, CONF_RADIUS_KM, CONF_ZONE
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -61,13 +61,13 @@ class OpenMensaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_select_canteen(self, user_input=None):
         if user_input is not None:
-            canteen_id = user_input[CONF_CANTEEN_ID]
+            canteen_id = user_input[CONF_MENSA_ID]
             canteen = next((c for c in self.canteens if str(c["id"]) == canteen_id), None)
 
             return self.async_create_entry(
                 title=canteen["name"],
                 data={
-                    CONF_CANTEEN_ID: canteen["id"],
+                    CONF_MENSA_ID: canteen["id"],
                     CONF_RADIUS_KM: self.radius_km,
                     CONF_ZONE: self.zone_coords,
                 },
@@ -80,7 +80,7 @@ class OpenMensaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="select_canteen",
             data_schema=vol.Schema({
-                vol.Required(CONF_CANTEEN_ID): vol.In(canteen_options)
+                vol.Required(CONF_MENSA_ID): vol.In(canteen_options)
             })
         )
 
