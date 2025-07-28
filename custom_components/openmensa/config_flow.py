@@ -20,16 +20,17 @@ class OpenMensaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     def __init__(self):
+        self.zone_entity_id: str | None = None
         self.zone_coords: tuple[float, float] | None = None
         self.radius_km: int = 10
         self.canteens: list[dict[str, Any]] = []
 
     async def async_step_user(self, user_input=None):
         if user_input is not None:
-            zone = user_input[CONF_ZONE]
+            self.zone_entity_id = user_input[CONF_ZONE]
             self.radius_km = user_input[CONF_RADIUS_KM]
 
-            zone_state = self.hass.states.get(zone)
+            zone_state = self.hass.states.get(self.zone_entity_id)
             if not zone_state:
                 return self.async_show_form(
                     step_id="user",
@@ -39,6 +40,12 @@ class OpenMensaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
             lat = zone_state.attributes.get("latitude")
             lon = zone_state.attributes.get("longitude")
+            if lat is None or lon is None:
+                return self.async_show_form(
+                    step_id="user",
+                    data_schema=self._get_zone_form_schema(),
+                    errors={"base": "zone_has_no_location"}
+                )
 
             self.zone_coords = (lat, lon)
 
@@ -64,12 +71,18 @@ class OpenMensaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             canteen_id = user_input[CONF_MENSA_ID]
             canteen = next((c for c in self.canteens if str(c["id"]) == canteen_id), None)
 
+            if not canteen:
+                return self.async_abort(reason="invalid_canteen")
+
+            await self.async_set_unique_id(str(canteen["id"]))
+            self._abort_if_unique_id_configured()
+
             return self.async_create_entry(
-                title=canteen["name"],
+                title=canteen.get("name", f"Mensa {canteen_id}"),
                 data={
                     CONF_MENSA_ID: canteen["id"],
                     CONF_RADIUS_KM: self.radius_km,
-                    CONF_ZONE: self.zone_coords,
+                    CONF_ZONE: self.zone_entity_id,
                 },
             )
 
@@ -86,7 +99,7 @@ class OpenMensaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     def _get_zone_form_schema(self):
         zones = {
-            state.entity_id: state.name
+            state.entity_id: state.name or state.entity_id
             for state in self.hass.states.async_all("zone")
         }
 

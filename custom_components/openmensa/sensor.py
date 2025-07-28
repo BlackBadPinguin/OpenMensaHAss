@@ -81,24 +81,23 @@ class OpenMensaWeekSensor(CoordinatorEntity, SensorEntity):
 
     @property
     def native_value(self):
-        summary = []
-        for i in range(7):
-            date = self._start_date + timedelta(days=i)
-            meals = self.coordinator.data.get(str(date), [])
-            if not meals:
-                summary.append(f"{date.strftime('%A')}: Geschlossen")
-            else:
-                meal_names = ", ".join(meal["name"] for meal in meals)
-                summary.append(f"{date.strftime('%A')}: {meal_names}")
-        return " | ".join(summary)
+        return self._start_date.isoformat()  # Alternativ: "Week overview"
 
     @property
     def extra_state_attributes(self):
         attributes = {
             ATTR_ATTRIBUTION: ATTRIBUTION,
+            "start_date": str(self._start_date),
             "week": {}
         }
+
         for i in range(7):
             date = self._start_date + timedelta(days=i)
-            attributes["week"][str(date)] = self.coordinator.data.get(str(date), [])
+            meals = self.coordinator.data.get(str(date), [])
+            day_name = date.strftime('%A')  # z. B. "Monday"
+            if not meals:
+                attributes["week"][day_name] = "Geschlossen"
+            else:
+                attributes["week"][day_name] = ", ".join(meal["name"] for meal in meals)
+
         return attributes
