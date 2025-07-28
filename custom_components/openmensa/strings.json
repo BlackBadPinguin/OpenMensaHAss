@@ -3,11 +3,25 @@
     "step": {
       "user": {
         "title": "OpenMensa konfigurieren",
-        "description": "Wähle deine Lieblingsmensa aus.",
+        "description": "Wähle eine Zone und den Suchradius, um Mensen in deiner Nähe zu finden.",
+        "data": {
+          "zone": "Zone auswählen",
+          "radius_km": "Suchradius in Kilometern"
+        }
+      },
+      "select_canteen": {
+        "title": "Mensa auswählen",
+        "description": "Wähle deine Lieblingsmensa aus der Liste der gefundenen Mensen.",
         "data": {
           "mensa_id": "Mensa"
         }
       }
+    },
+    "error": {
+      "zone_not_found": "Die ausgewählte Zone wurde nicht gefunden.",
+      "zone_has_no_location": "Die ausgewählte Zone enthält keine Standortdaten.",
+      "no_canteens_found": "In diesem Umkreis wurden keine Mensen gefunden.",
+      "invalid_canteen": "Die ausgewählte Mensa ist ungültig."
     }
   }
 }
