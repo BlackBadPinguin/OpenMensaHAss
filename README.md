@@ -124,7 +124,7 @@ automation:
 - Starte Home Assistant vollständig neu
 
 ### Veraltete Daten
-- Die Integration aktualisiert Daten automatisch alle 30 Minuten
+- Die Integration aktualisiert Daten automatisch alle 6 Stunden
 - Für sofortige Updates nutze den "Reload" Button in den Integrationseinstellungen
 
 ## 🤝 Beitragen

@@ -2,9 +2,10 @@
   "domain": "openmensa",
   "name": "OpenMensa",
   "version": "0.0.1",
-  "documentation": "https://github.com/blackbadpinguin/homeassistant-openmensa",
+  "documentation": "https://github.com/BlackBadPinguin/OpenMensaHAss",
+  "issue_tracker": "https://github.com/BlackBadPinguin/OpenMensaHAss/issues",
   "requirements": [],
-  "codeowners": ["@blackbadpinguin"],
+  "codeowners": ["@BlackBadPinguin"],
   "config_flow": true,
   "iot_class": "cloud_polling"
 }
