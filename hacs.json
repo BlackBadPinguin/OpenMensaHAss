@@ -1,15 +1,14 @@
+
 {
   "name": "OpenMensa",
-  "content_in_root": false,
-  "folder": "custom_components/openmensa",
-  "domains": ["integration"],
+  "hacs": "1.6.0",
+  "domains": ["sensor"],
+  "iot_class": "Cloud Polling",
   "homeassistant": "2023.1.0",
-  "version": "0.0.1",
-  "owner": "blackbadpinguin",
-  "repository": "openmensahass",
-  "is_private": false,
-  "description": "OpenMensa custom integration for Home Assistant",
-  "issues": "https://github.com/blackbadpinguin/openmensahass/issues",
-  "release_api": "https://api.github.com/repos/blackbadpinguin/openmensahass/releases",
-  "changelog": "https://github.com/blackbadpinguin/openmensahass/releases/tag/0.0.1"
+  "documentation": "https://github.com/BlackBadPinguin/OpenMensaHAss",
+  "issue_tracker": "https://github.com/BlackBadPinguin/OpenMensaHAss/issues",
+  "codeowners": ["@BlackBadPinguin"],
+  "content_in_root": false,
+  "country": ["DE", "AT", "CH"],
+  "render_readme": true
 }
