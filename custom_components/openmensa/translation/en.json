@@ -1,14 +1,27 @@
 {
-  "title": "OpenMensa",
   "config": {
     "step": {
       "user": {
         "title": "Configure OpenMensa",
-        "description": "Choose your preferred canteen.",
+        "description": "Select a zone and search radius to find canteens nearby.",
+        "data": {
+          "zone": "Select Zone",
+          "radius_km": "Search radius in kilometers"
+        }
+      },
+      "select_canteen": {
+        "title": "Select Canteen",
+        "description": "Choose your favorite canteen from the list of found canteens.",
         "data": {
           "mensa_id": "Canteen"
         }
       }
+    },
+    "error": {
+      "zone_not_found": "The selected zone was not found.",
+      "zone_has_no_location": "The selected zone contains no location data.",
+      "no_canteens_found": "No canteens were found in this area.",
+      "invalid_canteen": "The selected canteen is invalid."
     }
   }
 }
